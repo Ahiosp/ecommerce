@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get "cart_items/create"
+  get "cart_items/update"
+  get "cart_items/destroy"
+  get "carts/index"
+  get "products/index"
+  get "products/show"
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
