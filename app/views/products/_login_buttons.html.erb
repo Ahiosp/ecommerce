@@ -1,0 +1,9 @@
+<div class="mt-4">
+  <% if user_signed_in? %>
+    <%= form_for(:destroy_user_session, url: destroy_user_session_path, method: :delete, html: { class: "d-inline" }) do %>
+      <%= submit_tag "Se déconnecter", class: "btn btn-danger" %>
+    <% end %>
+  <% else %>
+    <%= link_to "Se connecter", new_user_session_path, class: "btn btn-primary" %>
+  <% end %>
+</div>
