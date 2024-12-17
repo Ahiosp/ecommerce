@@ -4,12 +4,14 @@
     <% @cart.cart_items.each do |cart_item| %>
       <div class="cart-item">
         <div class="cart-item-details">
-          <%= cl_image_tag cart_item.product.image.key%>
+          <%= cl_image_tag cart_item.product.image.key, height: 100, width: 100, crop: :fill %>
           <p class="cart-item-nom"><%= cart_item.product.nom%></p>
           <p class="cart-item-prix"><%= cart_item.product.prix%>€</p>
         </div>
         <div class="cart-item-actions">
-          <%= link_to "Supprimer", cart_cart_item_path(@cart, cart_item), method: :delete, class: "btn", data: { confirm: "Êtes-vous sûr de vouloir supprimer ce produit ?" }%>
+          <%= form_with(url: cart_cart_item_path(@cart, cart_item), method: :delete, local: true) do |form| %>
+            <%= form.submit "Supprimer", class: "btn btn-danger", data: { confirm: "Êtes-vous sûr de vouloir supprimer ce produit ?" } %>
+          <% end %>
         </div>
       </div>
     <% end %>

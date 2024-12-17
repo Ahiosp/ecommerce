@@ -5,8 +5,13 @@ class ApplicationController < ActionController::Base
   before_action :store_user_location!, if: :storable_location?
 
   def current_cart
-    return nil unless current_user
-    @current_cart ||= Cart.find_or_create_by(user: current_user)
+    if current_user
+      @current_cart ||= current_user.cart || current_user.create_cart
+    else
+      @current_cart ||= Cart.find_or_create_by(id: session[:cart_id])
+    end
+    session[:cart_id] = @current_cart.id
+    @current_cart
   end
 
   def after_sign_in_path_for(resource)

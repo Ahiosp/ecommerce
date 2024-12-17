@@ -22,11 +22,13 @@
 
     <%# Includes JavaScript files managed by Importmap %>
     <%= javascript_importmap_tags %>
+
   </head>
 
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+    <%= link_to "Mon Panier", carts_path, class: "btn btn-primary" %>
     <%= yield %>
   </body>
 </html>
