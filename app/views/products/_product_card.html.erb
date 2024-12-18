@@ -7,7 +7,7 @@
   <div class="card-body">
     <h5 class="card-title"><%= product.nom %></h5>
     <p class="card-text"><%= product.description %></p>
-    <p class="card-text"><%= "#{product.prix}€" %></p>
+    <p class="card-text"><%= number_to_currency(product.price_cents / 100.0, unit: "€", separator: ".", delimiter: "") %></p>
 
     <%= link_to "Voir les détails", product_path(product), class: "btn btn-primary" %>
 

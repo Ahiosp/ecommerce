@@ -11,7 +11,7 @@ products.each do |product_data|
 
   product = Product.create(
     nom: product_data["nom"],
-    prix: product_data["price"],
+    price_cents: product_data["price_cents"],
     description: product_data["description"],
     disponibilité: product_data["disponibilité"]
   )

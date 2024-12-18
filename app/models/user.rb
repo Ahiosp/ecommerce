@@ -4,4 +4,7 @@ class User < ApplicationRecord
   has_one :cart
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  def create_cart
+    Cart.create(user: self)
+  end
 end

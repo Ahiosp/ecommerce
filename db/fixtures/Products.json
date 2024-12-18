@@ -2,35 +2,35 @@
   {
     "nom": "Pink Crochet Top",
     "description":  "Crochet Pink Top, 100% cotton, size S/M.",
-    "price": 35.00,
+    "price_cents": 3500,
     "disponibilité": "en stock",
     "image": "https://res.cloudinary.com/dyvr8rakr/image/upload/v1732715545/pink%20top.jpg"
   },
   {
     "nom": "Magali Top",
     "description":  "Sea Blue Crochet Top with criss-cross strap in the back and embroideries. Size S, 100% cotton.",
-    "price": 40.00,
+    "price_cents": 4000,
     "disponibilité": "indisponible",
     "image": "https://res.cloudinary.com/dyvr8rakr/image/upload/v1732715545/magali%20top.jpg"
   },
   {
     "nom": "Cold Triangle Top",
     "description": "Blue and Violet Crochet Top with nude shoulders. Size S, 100% cotton",
-    "price": 35.00,
+    "price_cents": 3500,
     "disponibilité": "en stock",
     "image": "https://res.cloudinary.com/dyvr8rakr/image/upload/v1732715544/top%202.jpg"
   },
   {
     "nom": "Warm Triangle Top",
     "description": "Orange and Yellow Crochet Top with nude shoulders. Size M, 100% cotton",
-    "price": 30.00,
+    "price_cents": 3000,
     "disponibilité": "en stock",
     "image":"https://res.cloudinary.com/dyvr8rakr/image/upload/v1732715545/top%20v3.jpg"
   },
   {
     "nom": "Rainbow Turtleneck",
     "description": "Rainbow Turtleneck sweater crop, acrylic yarn, size S/M.",
-    "price": 30.00,
+    "price_cents": 3000,
     "disponibilité": "en stock",
     "image": "https://res.cloudinary.com/dyvr8rakr/image/upload/v1732715545/pull%201.jpg"
   }
