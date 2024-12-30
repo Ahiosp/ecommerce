@@ -1,0 +1,12 @@
+<h1>Créer une nouvelle commande</h1>
+<%= form_with model: @order, url: orders_path, local: true do |form|%>
+  <div>
+    <%= form.label :total_amount_cents, "Montant total" %>
+    <%= form.text_field :total_amount_cents, value: @cart.total_price_cents / 100.0, disabled: true %>
+  </div>
+
+  <div>
+    <%= form.submit "Créer la commande", class: "btn btn-primary" %>
+  </div>
+<% end %>
+<%= link_to "Retour au panier", carts_path %>

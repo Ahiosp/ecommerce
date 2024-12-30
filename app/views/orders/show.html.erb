@@ -1,0 +1,13 @@
+<h1>Commande confirmée</h1>
+
+<p>Merci pour votre achat ! Votre commande a été confirmée.</p>
+<p><strong>Référence de la commande:</strong><=% @order.id %></p>
+<p><strong>Montant total:</strong><=% number_to_currency(@order.total_amount_cents / 100, unit: "€") %></p>
+
+<% if @order.state == "paid" %>
+  <p>Votre commande est maintenant payée et sera expédiée sous peu. </p>
+<% else %>
+  <p>Le paiement n'a pas été confirmé. Veuillez réessayer. </p>
+<% end %>
+
+<p><%= link_to "Retour à la boutique", products_path %></p>

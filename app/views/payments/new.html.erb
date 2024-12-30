@@ -1,0 +1,2 @@
+<%# <p>Payer votre commande</p>
+<p>Montant total: <%= number_to_currency(@order.total_amount_cents/100, unit: "€") %></p>

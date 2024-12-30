@@ -6,7 +6,7 @@
         <div class="cart-item-details">
           <%= cl_image_tag cart_item.product.image.key, height: 100, width: 100, crop: :fill %>
           <p class="cart-item-nom"><%= cart_item.product.nom%></p>
-          <p class="cart-item-prix"><%= cart_item.product.prix%>€</p>
+          <p class="cart-item-prix"><%= number_to_currency(cart_item.product.price_cents / 100 , unit: '€') %></p> <!-- Prix formaté -->
         </div>
         <div class="cart-item-actions">
           <%= form_with(url: cart_cart_item_path(@cart, cart_item), method: :delete, local: true) do |form| %>
@@ -19,8 +19,18 @@
 
 
   <div class="total-cart">
-    <p>Total : <%= @cart.cart_items.sum {|item| item.product.prix}%>€</p>
+    <p>Total : <%= number_to_currency(@cart.total_price_cents / 100, unit: "€", separator: ".", delimiter: "") %></p>
   </div>
+
+ <!-- Vérifier si un commande existe pour ce panier, autrement la créer -->
+  <% @order = Order.find_by(cart: @cart, state: "pending") %>
+  <% if @order %>
+    <%= form_with(url: new_payment_path, method: :get, local: true) do |form| %>
+      <%= form.submit 'Payer', class: 'btn btn-success' %>
+    <% end %>
+  <% else %>
+    <p><%= link_to "Créer une commande et payer", new_order_path %></p>
+  <% end %>
 
 <% else %>
   <p>Votre panier est vide</p>
