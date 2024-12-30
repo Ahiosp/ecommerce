@@ -1,10 +1,6 @@
 class CartsController < ApplicationController
-before_action :set_cart, only: [ :index, :show ]
+before_action :set_cart, only: [ :index ]
   def index
-    load_cart_data
-  end
-
-  def show
     load_cart_data
   end
 

@@ -2,60 +2,55 @@ class PaymentsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    # On récupère ou crée la commande associée au panier de l'utilisateur.
     @cart = current_user.cart
 
-    # Vérifiez si une commande existe déjà pour ce panier
-    @order = Order.find_by(cart_id: @cart.id, state: 'pending')
-
-    # Si la commande n'existe pas, créez une nouvelle commande.
-    unless @order
-      @order = Order.create(cart: @cart, state: 'pending')
-      if @order.persisted?
-        Rails.logger.info("Nouvelle commande créée avec ID: #{@order.id}")
-      else
-        redirect_to carts_path, alert: "Le panier n'a pas été sauvegardé."
-        return
-      end
-    end
-
-    if @order.nil? || @order.id.nil?
-      redirect_to carts_path, alert: "Une erreur est survenue lors de la création du panier."
+    # Vérifie si le panier est vide
+    if @cart.cart_items.empty?
+      redirect_to carts_path, alert: "Votre panier est vide."
       return
-    else
-      Rails.logger.info("Commande trouvée avec ID: #{@order.id}")
     end
 
-    # Créez la session de paiement Stripe.
-    session = Stripe::Checkout::Session.create({
-      payment_method_types: ['card'],
-      line_items: @order.cart.cart_items.map { |item|
-        {
-          price_data: {
-            currency: 'eur',
-            product_data: {
-              name: item.product.nom,
-              images: [url_for(item.product.image)],
+    # Trouve ou crée une commande en attente
+    @order = Order.find_or_create_by(cart: @cart, state: "pending") do |order|
+      order.total_amount_cents = @cart.total_price_cents
+    end
+
+    # Mets à jour le montant total de la commande si nécessaire
+    @order.update(total_amount_cents: @cart.total_price_cents) unless @order.total_amount_cents == @cart.total_price_cents
+
+    # Crée une session de paiement Stripe
+    begin
+      session = Stripe::Checkout::Session.create({
+        payment_method_types: [ "card" ],
+        line_items: @order.cart.cart_items.map { |item|
+          {
+            price_data: {
+              currency: "eur",
+              product_data: {
+                name: item.product.nom,
+                images: [ url_for(item.product.image) ]
+              },
+              unit_amount: item.product.price_cents  # Prix en centimes
             },
-            unit_amount: item.product.price_cents,  # Prix en centimes
-          },
-          quantity: 1,  # Chaque produit est acheté en un seul exemplaire
-        }
-      },
-      mode: 'payment',
-      success_url: order_url(@order.id),  # URL de succès après paiement
-      cancel_url: order_url(@order.id),   # URL d'annulation
-    })
-    Rails.logger.debug "Session Stripe créée avec ID: #{session.id}"
+            quantity: 1  # Chaque produit est acheté en un seul exemplaire
+          }
+        },
+        mode: "payment",
+        success_url: order_url(@order.id),  # URL de succès après paiement
+        cancel_url: carts_url             # URL d'annulation
+      })
 
-    @order.update(checkout_session_id: session.id)
+      # Enregistre l'ID de la session Stripe dans la commande
+      @order.update(checkout_session_id: session.id)
 
-    redirect_to session.url
+      # Redirige vers l'URL de paiement Stripe
+      redirect_to session.url, allow_other_host: true
 
     rescue Stripe::StripeError => e
       Rails.logger.error "Erreur Stripe lors de la création de la session : #{e.message}"
       redirect_to carts_path, alert: "Une erreur est survenue lors de la création de la session de paiement."
-  end
+    end  # <-- End du begin ... rescue
+  end  # <-- End de la méthode new
 
   def create
   end

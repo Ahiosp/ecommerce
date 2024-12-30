@@ -22,8 +22,14 @@
     <p>Total : <%= number_to_currency(@cart.total_price_cents / 100, unit: "€", separator: ".", delimiter: "") %></p>
   </div>
 
-  <%= form_with(url: new_payment_path(order_id: @order.id), method: :get, local: true) do |form| %>
-    <%= form.submit 'Payer', class: 'btn btn-success' %>
+ <!-- Vérifier si un commande existe pour ce panier, autrement la créer -->
+  <% @order = Order.find_by(cart: @cart, state: "pending") %>
+  <% if @order %>
+    <%= form_with(url: new_payment_path, method: :get, local: true) do |form| %>
+      <%= form.submit 'Payer', class: 'btn btn-success' %>
+    <% end %>
+  <% else %>
+    <p><%= link_to "Créer une commande et payer", new_order_path %></p>
   <% end %>
 
 <% else %>
