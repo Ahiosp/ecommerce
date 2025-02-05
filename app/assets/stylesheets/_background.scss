@@ -1,0 +1,21 @@
+before {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+}
+
+body::before {
+  content: ''; /* Nécessaire pour afficher le pseudo-élément */
+  position: fixed;
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-image: url('https://res.cloudinary.com/dyvr8rakr/image/upload/v1735566801/kyle-cesmat-9g35zZG6Mj0-unsplash_sdnwqz.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: 0.8;
+  z-index: -1;
+}
