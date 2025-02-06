@@ -9,19 +9,19 @@
     <!-- <p class="card-text"><%= product.description %></p> -->
     <p class="card-text"><%= number_to_currency(product.price_cents / 100.0, unit: "€", separator: ".", delimiter: "") %></p>
 
-    <%= link_to "Voir les détails", product_path(product), class: "btn btn-primary" %>
+    <%= link_to "Voir les détails", product_path(product), class: "btn btn-outline-success ml-2 btn-sm" %>
 
     <% if user_signed_in? %>
       <% if current_cart %> <!-- Vérifie si le panier existe déjà pour l'utilisateur -->
         <%= form_with(url: cart_cart_items_path(current_cart.id, product_id: product.id), method: :post, local: true) do |form| %>
           <%= form.hidden_field :product_id, value: product.id %>
-          <%= form.submit "Ajouter au panier", class: "btn btn-success ml-2" %>
+          <%= form.submit "Ajouter au panier", class: "btn btn-outline-success btn-sm ml-2" %>
         <% end %>
       <% else %> <!-- Si aucun panier n'existe, afficher un message -->
-        <p class="text-danger">Vous n'avez pas de panier actif. Créez un panier pour ajouter des produits.</p>
+        <p class="text-danger"><small>Vous n'avez pas de panier actif. Créez un panier pour ajouter des produits.</small></p>
       <% end %>
     <% else %>
-      <p class="text-danger">Vous devez être connecté pour ajouter des éléments au panier</p>
+      <p class="text-danger"><small>Vous devez être connecté pour ajouter des éléments au panier</small></p>
     <% end %>
   </div>
 </div>
