@@ -6,9 +6,9 @@ before {
 
 body::before {
   content: ''; /* Nécessaire pour afficher le pseudo-élément */
-  position: fixed;
+  position: absolute;
   display: flex;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   top: 0;
   left: 0;
@@ -18,4 +18,10 @@ body::before {
   background-attachment: fixed;
   opacity: 0.8;
   z-index: -1;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

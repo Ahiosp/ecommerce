@@ -3,6 +3,7 @@
 //= link @popperjs--core.js
 //= link bootstrap.min.js
 //= link application.scss
-//= link application.js
 //= link application.css
+//= link application.js
 //= link bootstrap.js
+//= link_tree ../stylesheets
