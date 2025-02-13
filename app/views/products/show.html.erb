@@ -1,10 +1,9 @@
-<h1>Products#show</h1>
+<%= render 'titleh1' %>
+<h2 class="show-title"><%= @product.nom %></h2>
 <div class="container">
-  <%= render 'login_buttons' %> <!-- Inclure le partial des boutons de connexion/déconnexion -->
-
   <div class="row">
     <div class="col-md-4">
-      <%= render partial: "product_card", locals: { product: @product } %> <!-- Inclure le partial pour ce produit -->
+      <%= render partial: "product_show", locals: { product: @product } %> <!-- Inclure le partial pour ce produit -->
     </div>
   </div>
 </div>

@@ -1,15 +1,15 @@
-<div class="card">
+<div class="product-card-img-container">
   <% if product.image.attached? %>
       <%= cl_image_tag product.image.key, height: 200, width: 200, crop: :fill %>
   <% else %>
-      <img src="https://via.placeholder.com/200" class="card-img-top" alt="Image non disponible">
+      <img src="https://via.placeholder.com/200" class="product-card-img-container" alt="Image non disponible">
   <% end %>
-  <div class="card-body">
-    <h5 class="card-title"><%= product.nom %></h5>
+  <div class="product-card-body">
+    <h5 class="product-card-title"><%= product.nom %></h5>
     <!-- <p class="card-text"><%= product.description %></p> -->
-    <p class="card-text"><%= number_to_currency(product.price_cents / 100.0, unit: "€", separator: ".", delimiter: "") %></p>
+    <p class="product-card-text"><%= number_to_currency(product.price_cents / 100.0, unit: "€", separator: ".", delimiter: "") %></p>
 
-    <%= link_to "Voir les détails", product_path(product), class: "btn btn-outline-success ml-2 btn-sm" %>
+    <%= link_to "Voir les détails", product_path(product), class: "btn btn-outline-primary ml-2 btn-sm", style:"--bs-text-opacity: .5;"%>
 
     <% if user_signed_in? %>
       <% if current_cart %> <!-- Vérifie si le panier existe déjà pour l'utilisateur -->
@@ -18,10 +18,10 @@
           <%= form.submit "Ajouter au panier", class: "btn btn-outline-success btn-sm ml-2" %>
         <% end %>
       <% else %> <!-- Si aucun panier n'existe, afficher un message -->
-        <p class="text-danger"><small>Vous n'avez pas de panier actif. Créez un panier pour ajouter des produits.</small></p>
+        <!-- <p class="text-danger"><small>Vous n'avez pas de panier actif. Créez un panier pour ajouter des produits.</small></p> -->
       <% end %>
     <% else %>
-      <p class="text-danger"><small>Vous devez être connecté pour ajouter des éléments au panier</small></p>
+      <!-- <p class="text-danger"><small>Vous devez être connecté pour ajouter des éléments au panier</small></p> -->
     <% end %>
   </div>
 </div>

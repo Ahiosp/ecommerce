@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'LemonMilk';
+  src: url(asset-path('LemonMilk.otf')) format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1 {
+  font-family: 'LemonMilk', sans-serif;
+  color: #EAFAEA;
+  font-size: 80px;
+}

@@ -1,11 +1,10 @@
-<h1>Douceur de fil</h1>
-<div class="container">
-  <%= render 'login_buttons' %> <!-- Inclure le partial des boutons de connexion/déconnexion -->
 
-  <div class="row">
+<div class="container">
+  <%= render 'titleh1' %>
+  <div class="card-container">
     <% @products.each do |product| %>
-      <div class="col-md-4 mb-4">
-        <%= render partial: "product_card", locals: { product: product } %> <!-- Inclure le partial pour chaque produit -->
+      <div class="product-card">
+        <%= render partial: "product_card", locals: { product: product } %>
       </div>
     <% end %>
   </div>

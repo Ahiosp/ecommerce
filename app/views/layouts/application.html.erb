@@ -17,7 +17,6 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes application.scss stylesheet for all pages %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
     <%# Includes JavaScript files managed by Importmap %>
@@ -26,10 +25,7 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= render "shared/home_button" %>  <!-- Bouton d'accueil avant le yield -->
-    <%= link_to "Mon Panier", carts_path, class: "btn btn-sm" %>
+    <%= render "shared/navbar" %>
     <%= yield %>
   </body>
 </html>
