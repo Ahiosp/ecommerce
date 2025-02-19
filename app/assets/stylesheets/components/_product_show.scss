@@ -1,0 +1,71 @@
+.container-show {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 90%;
+  width: 100%;
+  background: rgba(223, 242, 235, 0.7);
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+@font-face {
+  font-family: 'Pioggia';
+  src: url(asset-path('Pioggia.otf')) format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.show-title {
+  font-family:'Pioggia', sans-serif;
+  color: #4A628A;
+}
+
+.card-img-show {
+  crop: fill;
+}
+
+.wrapper-main {
+  margin-top: 0.5rem;
+}
+
+.show-description, .show-prix {
+  color: #4A628A;
+}
+
+/* Styles pour les écrans petits */
+@media (max-width: 480px) {
+  .container-show {
+    max-width: 95%; /* Ajustement pour très petits écrans */
+  }
+}
+
+/* Styles pour les écrans moyens */
+@media (min-width: 481px) and (max-width: 768px) {
+  .container-show {
+    max-width: 85%; /* Ajustement pour petits à moyens écrans */
+  }
+}
+
+/* Styles pour les grands écrans */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container-show {
+    max-width: 75%; /* Ajustement pour grands écrans */
+  }
+}
+
+/* Styles pour les très grands écrans */
+@media (min-width: 1025px) {
+  .container-show {
+    max-width: 60%; /* Ajustement pour très grands écrans */
+  }
+}

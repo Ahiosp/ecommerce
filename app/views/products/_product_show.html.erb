@@ -2,20 +2,18 @@
   <% if product.image.attached? %>
       <%= cl_image_tag product.image.key, height: 200, width: 200, crop: :fill %>
   <% else %>
-      <img src="https://via.placeholder.com/200" class="card-img-top" alt="Image non disponible">
+      <img src="https://via.placeholder.com/200" class="card-img-show" alt="Image non disponible">
   <% end %>
   <div class="wrapper-main">
     <!-- <h5 class="show-title"><%= product.nom %></h5> -->
     <p class="show-description"><%= product.description %></p>
     <p class="show-prix"><%= number_to_currency(product.price_cents / 100.0, unit: "€", separator: ".", delimiter: "") %></p>
 
-    <%= link_to "Voir les détails", product_path(product), class: "btn btn-outline-success ml-2 btn-sm" %>
-
     <% if user_signed_in? %>
       <% if current_cart %> <!-- Vérifie si le panier existe déjà pour l'utilisateur -->
         <%= form_with(url: cart_cart_items_path(current_cart.id, product_id: product.id), method: :post, local: true) do |form| %>
           <%= form.hidden_field :product_id, value: product.id %>
-          <%= form.submit "Ajouter au panier", class: "btn btn-outline-success btn-sm ml-2" %>
+          <%= form.submit "Ajouter au panier", class: "btn btn-outline-primary ml-2 btn-sm", style:"--bs-text-opacity: .5;"%>
         <% end %>
       <% else %> <!-- Si aucun panier n'existe, afficher un message -->
         <p class="text-danger"><small>Vous n'avez pas de panier actif. Créez un panier pour ajouter des produits.</small></p>
