@@ -1,9 +1,7 @@
-<%= render 'titleh1' %>
-<h2 class="show-title"><%= @product.nom %></h2>
 <div class="container">
-  <div class="row">
-    <div class="col-md-4">
+  <%= render 'titleh1' %>
+  <div class="container-show">
+    <h2 class="show-title"><%= @product.nom %></h2>
       <%= render partial: "product_show", locals: { product: @product } %> <!-- Inclure le partial pour ce produit -->
-    </div>
   </div>
 </div>
